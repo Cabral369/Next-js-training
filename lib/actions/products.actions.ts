@@ -1,4 +1,5 @@
 'use server';
+
 import { prisma } from "@/db/prisma";
 import { convertToPlanObject } from "../utils";
 import { LATEST_PRODUCTS_LIMIT } from "../constants";
