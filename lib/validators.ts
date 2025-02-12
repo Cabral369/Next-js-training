@@ -54,3 +54,14 @@ export const insertCartSchema = z.object({
     sessionCartId: z.string().min(3, 'Session cart id is too short'),
     userId: z.string().optional().nullable(),
 })
+
+//schema for shipping address
+export const shippingAddressSchema = z.object({
+    fullName: z.string().min(3, 'Name is too short').max(255, 'Name is too long'),
+    streetAddress: z.string().min(3, 'Street address is too short').max(255, 'Street address is too long'),
+    city: z.string().min(3, 'City is too short').max(255, 'City is too long'),
+    postalCode: z.string().min(3, 'Postal code is too short').max(255, 'Postal code is too long'),
+    country: z.string().min(3, 'Country is too short').max(255, 'Country is too long'),
+    lat: z.number().optional(),
+    lng: z.number().optional(),
+})
