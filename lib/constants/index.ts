@@ -16,9 +16,9 @@ export const signUpDefaultValues = {
 }
 
 export const shippingAddressDefaultValues = {
-    fullName: 'Nicolas Cabral',
-    streetAddress: 'Rua Lambari',
-    city: 'Xique-Xique',
-    postalCode: '47400-000',
-    country: 'Brasil',
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: '',
 }
