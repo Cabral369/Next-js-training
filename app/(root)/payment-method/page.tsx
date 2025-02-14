@@ -2,25 +2,26 @@ import { Metadata } from "next";
 import { auth } from "@/auth";
 import { getUserById } from "@/lib/actions/user.actions";
 import PaymentMethodForm from "./payment-method-form";
+import CheckOutSteps from "@/components/shared/checkout-steps";
 
 export const metadata: Metadata = {
-    title: "Select Payment Method",
-}
+  title: "Select Payment Method",
+};
 
 const PaymentMethodPage = async () => {
-    const session = await auth();
-    const userId = session?.user?.id;
+  const session = await auth();
+  const userId = session?.user?.id;
 
-    if (!userId) throw new Error("User not found");
+  if (!userId) throw new Error("User not found");
 
-    const user = await getUserById(userId);
+  const user = await getUserById(userId);
 
-    return (
+  return (
     <>
-    <PaymentMethodForm preferredPaymentType={user.paymentMethod}/>Form
+      <CheckOutSteps current={2} />
+      <PaymentMethodForm preferredPaymentType={user.paymentMethod} />
     </>
-    )
-    
-}
- 
+  );
+};
+
 export default PaymentMethodPage;
