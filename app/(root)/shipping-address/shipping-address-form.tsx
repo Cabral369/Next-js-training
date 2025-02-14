@@ -23,9 +23,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader } from "lucide-react";
 import { updateUserAddress } from "@/lib/actions/user.actions";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
+  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof shippingAddressSchema>>({
