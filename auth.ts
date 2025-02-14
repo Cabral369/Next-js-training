@@ -4,14 +4,14 @@ import { prisma } from '@/db/prisma';
 import  CredentialsProvider  from 'next-auth/providers/credentials';
 import { compareSync } from 'bcrypt-ts-edge';
 import type { NextAuthConfig } from 'next-auth';
-import {cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 
 export const config = {
     pages:{
-        signIn: '/auth/sign-in',
-        error: '/auth/error',
+        signIn: '/sign-in',
+        error: '/sign-in',
     },
     session:{
         strategy: 'jwt',
@@ -67,6 +67,7 @@ export const config = {
         async jwt({token,user,trigger, session}:any){
 
             if(user){
+                token.id = user.id;
                 token.role = user.role;
 
                 if(user.name === 'NO_NAME'){
@@ -77,12 +78,57 @@ export const config = {
                         data:{name: token.name},
                     })
                 }
+
+                if(trigger ===  'signIn' || trigger === 'signUp'){
+                    const cookiesObject = await cookies();
+                    const sessionCartId = cookiesObject.get('sessionCartId')?.value;
+
+                    if(sessionCartId){
+                        const sessionCart = await prisma.cart.findFirst({
+                            where: {sessionCartId}
+                        });
+
+                        if(sessionCart){
+                            await prisma.cart.deleteMany({
+                                where: {userId: user.id}
+                            })
+
+                            await prisma.cart.update({
+                                where: {id : sessionCart.id},
+                                data: {userId: user.id}
+                            })
+                        }
+
+                    }
+                }
+
+            }
+
+            if(session?.user.name && trigger === 'update'){
+                token.name = session.user.name;
             }
 
             return token;
         },
 
         authorized({request, auth} : any){
+            //array of regex patterns of paths we want to protect
+            const protectedPaths= [ 
+              /\/shipping-address/,  
+              /\/payment-method/,  
+              /\/place-order/,  
+              /\/profile/,  
+              /\/user\/(.*)/,
+              /\/order\/(.*)/,
+              /\/admin/,  
+            ]
+
+            //get pathname from request URL object
+            const { pathname } = request.nextUrl;
+
+            //check if user is not authenticated and acessing a protected path
+            if(!auth && protectedPaths.some((path) => path.test(pathname))) return false;
+
             //check for session cart cookie
             if(!request.cookies.get('sessionCartId')){
 
