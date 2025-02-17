@@ -1,7 +1,7 @@
 'use server'
 
 import { isRedirectError } from "next/dist/client/components/redirect-error"
-import { formatErrorMessages } from "../utils";
+import { convertToPlanObject, formatErrorMessages } from "../utils";
 import { getMyCart } from "./cart.actions";
 import { getUserById } from "./user.actions";
 import { insertOrderSchema } from "../validators";
@@ -81,4 +81,23 @@ export async function createOrder(){
         if (isRedirectError(error)) throw error;
         return {success:false,message:formatErrorMessages(error)}
     }
+}
+
+export async function getOrderById(orderId: string){
+    const data = await prisma.order.findUnique({
+        where: {
+            id:orderId
+        },
+        include:{
+            orderitems:true,
+            user:{
+                select:{
+                    name:true,
+                    email:true
+                }
+            }
+        }
+    })
+
+    return convertToPlanObject(data);
 }
