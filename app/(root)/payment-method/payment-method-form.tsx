@@ -40,17 +40,19 @@ const PaymentMethodForm = ({
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = async (values: z.infer<typeof paymentMethodSchema>) => {
-    const res = await updateUserPaymentMethod(values);
+    startTransition(async () => {
+      const res = await updateUserPaymentMethod(values);
 
-    if (!res.success) {
-      toast({
-        variant: "destructive",
-        description: res.message,
-      });
-      return;
-    }
+      if (!res.success) {
+        toast({
+          variant: "destructive",
+          description: res.message,
+        });
+        return;
+      }
 
-    router.push("/place-order");
+      router.push("/place-order");
+    });
   };
 
   return (

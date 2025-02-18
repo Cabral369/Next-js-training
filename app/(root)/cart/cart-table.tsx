@@ -18,16 +18,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const { toast } = useToast();
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
-
-  const nextPage = () => {
-    router.push("/shipping-address");
-  };
 
   return (
     <>
