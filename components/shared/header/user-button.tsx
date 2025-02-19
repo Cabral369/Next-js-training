@@ -53,7 +53,7 @@ const UserButton = async () => {
           <DropdownMenuItem className="p-0 mb-1">
             <Link href="profile">
               <Button className="w-full py-4 justify-start" variant="ghost">
-                User profile
+                User Profile
               </Button>
             </Link>
           </DropdownMenuItem>
