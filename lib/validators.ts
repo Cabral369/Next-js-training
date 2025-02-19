@@ -120,3 +120,9 @@ export const paymentResolveSchema = z.object({
   email_address: z.string(),
   price_paid: z.string(),
 });
+
+//schema for updating user profile
+export const updateUserProfileSchema = z.object({
+  name: z.string().min(3, "Name is too short").max(255, "Name is too long"),
+  email: z.string().min(3, "Email is too short").max(255, "Email is too long"),
+});
