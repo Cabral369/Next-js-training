@@ -51,7 +51,7 @@ const UserButton = async () => {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuItem className="p-0 mb-1">
-            <Link href="user/profile">
+            <Link href="/user/profile">
               <Button className="w-full py-4 justify-start" variant="ghost">
                 User Profile
               </Button>
