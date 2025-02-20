@@ -82,7 +82,7 @@ const PaymentMethodForm = ({
                         {PAYMENT_METHODS.map((paymentMethod) => (
                           <FormItem
                             key={paymentMethod}
-                            className="flex itemns-center space-x-3 space-y-0"
+                            className="flex items-center space-x-3 space-y-0"
                           >
                             <FormControl>
                               <RadioGroupItem

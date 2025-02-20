@@ -18,6 +18,8 @@ const PaymentMethodPage = async () => {
 
   const preferredPaymentType = user.paymentMethod;
 
+  console.log("preferredPaymentType", preferredPaymentType);
+
   return (
     <>
       <CheckOutSteps current={2} />
