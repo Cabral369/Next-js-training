@@ -322,7 +322,7 @@ type SalesDataType = {
 
 //get sales data and order summary
 export async function getOrderSummary() {
-  //get counts for each resource/
+  //get counts for each resource
   const ordersCount = await prisma.order.count();
   const productsCount = await prisma.product.count();
   const usersCount = await prisma.user.count();
@@ -336,7 +336,7 @@ export async function getOrderSummary() {
   const salesDataRaw = await prisma.$queryRaw<
     Array<{ month: string; totalSales: Prisma.Decimal }>
   >`SELECT to_char("createdAt", 'MM/YY') as "month", sum("totalPrice") as "totalSales" FROM
-  "Order" GROUP BY to_char("createdAt", 'MM/YY')`;
+      "Order" GROUP BY to_char("createdAt", 'MM/YY')`;
 
   const salesData: SalesDataType = salesDataRaw.map((item) => ({
     month: item.month,
@@ -397,4 +397,24 @@ export async function getAllOrders({
     data,
     totalPages: Math.ceil(dataCount / limit),
   };
+}
+
+//delete an order
+export async function deleteOrder(id: string) {
+  try {
+    await prisma.order.delete({
+      where: {
+        id,
+      },
+    });
+
+    revalidatePath("admin/orders");
+
+    return {
+      success: true,
+      message: "Order deleted",
+    };
+  } catch (error) {
+    return { success: false, message: formatErrorMessages(error) };
+  }
 }
