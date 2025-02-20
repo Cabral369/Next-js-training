@@ -60,6 +60,13 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat("pt-BR", {
   minimumFractionDigits: 2,
 });
 
+//Format Number
+const NUMBER_FORMATTER = new Intl.NumberFormat("pt-BR");
+
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number);
+}
+
 export function formatCurrency(amount: number | string | null) {
   if (typeof amount === "number") {
     return CURRENCY_FORMATTER.format(amount);
