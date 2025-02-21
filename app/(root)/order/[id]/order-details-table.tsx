@@ -114,6 +114,28 @@ const OrderDetailsTable = ({
       </Button>
     );
   };
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
+    const { toast } = useToast();
+
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await deliverOrder(order.id);
+            toast({
+              variant: res?.success ? "default" : "destructive",
+              description: res?.message,
+            });
+          })
+        }
+      >
+        {isPending ? "Loading..." : "Mark as Delivered"}
+      </Button>
+    );
+  };
 
   return (
     <>
@@ -143,7 +165,7 @@ const OrderDetailsTable = ({
               </p>
               {isDelivered ? (
                 <Badge variant="secondary">
-                  Paid at {formatDate(deliveredAt!).dateTime}
+                  Delivered at {formatDate(deliveredAt!).dateTime}
                 </Badge>
               ) : (
                 <Badge variant="destructive">Not Delivered</Badge>

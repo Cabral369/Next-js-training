@@ -127,8 +127,6 @@ export async function updateUserPaymentMethod(
 
     const paymentMethod = paymentMethodSchema.parse(data);
 
-    console.log(paymentMethod);
-
     await prisma.user.update({
       where: { id: currentUser.id },
       data: { paymentMethod: paymentMethod.type },
