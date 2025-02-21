@@ -1,8 +1,9 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-import { convertToPlanObject } from "../utils";
+import { convertToPlanObject, formatErrorMessages } from "../utils";
 import { LATEST_PRODUCTS_LIMIT, PAGE_SIZE } from "../constants";
+import { revalidatePath } from "next/cache";
 
 //get latest products
 export async function getLatestProducts() {
@@ -48,4 +49,32 @@ export async function getAllProducts({
     data,
     totalPages: Math.ceil(dataCount / limit),
   };
+}
+
+//delete a product
+export async function deleteProduct(id: string) {
+  try {
+    const productExists = await prisma.product.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!productExists) throw new Error("Product not found");
+
+    await prisma.product.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath("/admin/products");
+
+    return {
+      success: true,
+      message: "Product deleted successfully",
+    };
+  } catch (error) {
+    return { success: false, message: formatErrorMessages(error) };
+  }
 }
