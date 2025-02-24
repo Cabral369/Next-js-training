@@ -1,7 +1,8 @@
+import { Metadata } from "next";
 import CartTable from "./cart-table";
 import { getMyCart } from "@/lib/actions/cart.actions";
 
-export const metadada = {
+export const metadada: Metadata = {
   title: "Shopping Cart",
 };
 
