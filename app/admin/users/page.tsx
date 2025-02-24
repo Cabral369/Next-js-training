@@ -51,9 +51,9 @@ const AdminUserPage = async (props: {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
                     {user.role === "admin" ? (
-                      <Badge variant="secondary">User</Badge>
-                    ) : (
                       <Badge variant="default">Admin</Badge>
+                    ) : (
+                      <Badge variant="secondary">User</Badge>
                     )}
                   </TableCell>
                   <TableCell className="space-x-2">
