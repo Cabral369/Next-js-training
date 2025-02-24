@@ -131,3 +131,9 @@ export const updateUserProfileSchema = z.object({
   name: z.string().min(3, "Name is too short").max(255, "Name is too long"),
   email: z.string().min(3, "Email is too short").max(255, "Email is too long"),
 });
+
+//shcme to update user
+export const updateUserSchema = updateUserProfileSchema.extend({
+  id: z.string().min(1, "Id is required"),
+  role: z.string().min(1, "role is required"),
+});
