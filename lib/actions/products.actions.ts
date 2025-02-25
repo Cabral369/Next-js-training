@@ -40,13 +40,21 @@ export async function getProductById(productId: string) {
 
 //get all products
 export async function getAllProducts({
+  query,
   limit = PAGE_SIZE,
   page,
+  category,
+  price,
+  rating,
+  sort,
 }: {
   query: string;
   limit?: number;
   page: number;
   category?: string;
+  price?: string;
+  rating?: string;
+  sort?: string;
 }) {
   const data = await prisma.product.findMany({
     orderBy: {
