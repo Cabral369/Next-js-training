@@ -5,7 +5,6 @@ import {
   getAllProducts,
 } from "@/lib/actions/products.actions";
 import Link from "next/link";
-import { title } from "process";
 
 const prices = [
   { name: "R$0 to R$50", value: "0-50" },
