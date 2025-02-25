@@ -32,7 +32,7 @@ const ProductForm = ({
   productId,
 }: {
   type: "create" | "update";
-  product: Product;
+  product?: Product;
   productId?: string;
 }) => {
   const router = useRouter();
