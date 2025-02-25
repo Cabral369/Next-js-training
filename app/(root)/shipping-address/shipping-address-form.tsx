@@ -74,7 +74,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                 render={({
                   field,
                 }: {
-                  filed: ControllerRenderProps<
+                  field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
                     "fullName"
                   >;
@@ -96,7 +96,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                 render={({
                   field,
                 }: {
-                  filed: ControllerRenderProps<
+                  field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
                     "streetAddress"
                   >;
@@ -118,7 +118,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                 render={({
                   field,
                 }: {
-                  filed: ControllerRenderProps<
+                  field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
                     "city"
                   >;
@@ -140,7 +140,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                 render={({
                   field,
                 }: {
-                  filed: ControllerRenderProps<
+                  field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
                     "postalCode"
                   >;
@@ -162,7 +162,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                 render={({
                   field,
                 }: {
-                  filed: ControllerRenderProps<
+                  field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
                     "country"
                   >;
