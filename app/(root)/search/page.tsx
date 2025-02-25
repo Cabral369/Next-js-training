@@ -71,6 +71,8 @@ const SearchPage = async (props: {
 
   const categories = await getAllCategories();
 
+  const sortOrders = ["newest", "lowest", "highest", "rating"];
+
   return (
     <div className="grid md:grid-cols-5 md:gap-5">
       <div className="filter-links">
@@ -166,7 +168,19 @@ const SearchPage = async (props: {
               </Button>
             ) : null}
           </div>
-          {/* Sort */}
+          <div>
+            {/* Sort */}
+            Sort By{" "}
+            {sortOrders.map((x) => (
+              <Link
+                key={x}
+                className={`mx-2 ${sort === x && "font-bold"}`}
+                href={getFilterUrl({ s: x })}
+              >
+                {x}
+              </Link>
+            ))}
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {products.data.length === 0 && <div>No products found</div>}
