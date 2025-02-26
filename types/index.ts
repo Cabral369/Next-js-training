@@ -40,7 +40,7 @@ export type PaymentResolve = z.infer<typeof paymentResolveSchema>;
 
 export type UpdateUserProfile = z.infer<typeof updateUserProfileSchema>;
 
-export type insertReview = z.infer<typeof insertReviewSchema> & {
+export type Review = z.infer<typeof insertReviewSchema> & {
   id: string;
   createdAt: Date;
   user?: { name: string };
