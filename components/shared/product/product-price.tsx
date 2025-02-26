@@ -13,7 +13,7 @@ const ProductPrice = ({
 
   return (
     <p className={cn("text-2xl", className)}>
-      <span className="text-xs align-super">$</span>
+      <span className="text-xs align-super">R$</span>
       {intValue}
       <span className="text-xs align-super">.{floatValue}</span>
     </p>
