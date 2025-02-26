@@ -147,7 +147,7 @@ export const insertReviewSchema = z.object({
     .max(255, "Description is too long"),
   productId: z.string().min(3, "Product id is required"),
   userId: z.string().min(3, "User id is required"),
-  reating: z.coerce
+  rating: z.coerce
     .number()
     .int()
     .min(1, "Rating must be at least 1")
