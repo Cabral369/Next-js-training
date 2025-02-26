@@ -6,7 +6,6 @@ import { Product } from "@/types/index";
 import Rating from "./rating";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  console.log(product.rating);
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="p-0 items-center">
