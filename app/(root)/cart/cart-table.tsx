@@ -124,7 +124,13 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
                 </span>
               </div>
               <Link href="/shipping-address" className="w-full">
-                <Button disabled={isPending} className="text-center w-full">
+                <Button
+                  disabled={isPending}
+                  className="text-center w-full"
+                  onClick={() => {
+                    startTransition(() => {});
+                  }}
+                >
                   {isPending ? (
                     <Loader className="w-4 h-4 animate-spin" />
                   ) : (
